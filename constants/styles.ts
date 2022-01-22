@@ -2,7 +2,7 @@ import { DarkTheme, DefaultTheme, Theme, ThemeProvider } from "@react-navigation
 import { StyleSheet } from "react-native"
 
 // let currentTheme: Theme = DarkTheme;
-let currentTheme: Theme = DefaultTheme;
+export let currentTheme: Theme = DefaultTheme;
 
 export const mainStyles = StyleSheet.create(
   {

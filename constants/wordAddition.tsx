@@ -1,3 +1,4 @@
+import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import React from "react";
 import { Button, Text, TextInput, View } from "react-native";
 import { mainStyles } from "./styles";
@@ -8,7 +9,14 @@ interface WordDefinition {
     definition: string | null,
 }
 
-function OriginWordInput(props: { currentWord: string, onTextChange: (text: string) => void, onTextValidate: () => void }): React.ReactElement {
+function OriginWordInput(
+    props: {
+        currentWord: string,
+        onTextChange: (text: string) => void,
+        onTextValidate: () => void,
+        onTextClean: () => void,
+    },
+): React.ReactElement {
 
     return (
         <View>
@@ -17,7 +25,10 @@ function OriginWordInput(props: { currentWord: string, onTextChange: (text: stri
                 onChangeText={props.onTextChange}
                 value={props.currentWord}
             />
-            <Button title="Translate" onPress={props.onTextValidate} />
+            <View style={mainStyles.rowContainer}>
+                <Button title="Translate" onPress={props.onTextValidate} />
+                <Button title="Reset" color={DefaultTheme.colors.primary} onPress={props.onTextClean} />
+            </View>
         </View>
     )
 }
@@ -67,6 +78,13 @@ export default class WordAddition extends React.PureComponent<WordAdditionProps,
         })
     }
 
+    private callbackCleanWordInput() {
+        this.setState({
+            ...this.state,
+            currentWritenWord: "",
+        })
+    }
+
     render(): React.ReactNode {
         return (
             <View>
@@ -74,6 +92,7 @@ export default class WordAddition extends React.PureComponent<WordAdditionProps,
                     currentWord={this.state.currentWritenWord}
                     onTextChange={(text) => { this.callbackOnWordChange(text) }}
                     onTextValidate={() => this.callbackTranslateWord()}
+                    onTextClean={() => this.callbackCleanWordInput()}
                 />
                 <OriginWordShow word={this.state.validatedWord} />
             </View>
