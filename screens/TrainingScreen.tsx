@@ -1,17 +1,23 @@
 import { NavigationProp } from '@react-navigation/native';
-import { Button, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import { NavigationToolbar } from '../components/NavigationToolbar';
+import { mainStyles } from '../constants/styles';
 
 
-export interface TrainingScreenProps{
- navigation: NavigationProp<any,any>
+export interface TrainingScreenProps {
+  navigation: NavigationProp<any, any>
 }
 
 
-export default function TrainingScreen({ navigation }: TrainingScreenProps) {
+export default function TrainingScreen(props: TrainingScreenProps) {
+  const navigationToolbar = NavigationToolbar(props.navigation);
   return (
-    <View>
-      <Text>Training screen page</Text>
-      <Button title="Add new word" onPress={() => { return navigation.navigate("AddNewWord") }} />
+    <View style={mainStyles.fullPage}>
+      <View style={mainStyles.mainContent}>
+        <Text>Training screen page</Text>
+      </View>
+      {navigationToolbar}
     </View>
   );
 }
+

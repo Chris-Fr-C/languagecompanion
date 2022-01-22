@@ -1,16 +1,27 @@
 import { NavigationProp } from '@react-navigation/native';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { AppConfig, View } from 'react-native';
+import { NavigationToolbar } from '../components/NavigationToolbar';
+import { mainStyles } from '../constants/styles';
+import WordAddition from '../constants/wordAddition';
 
 export interface AddNewWordScreenProps {
-  navigation: NavigationProp<any, any>
+  navigation: NavigationProp<any, any>;
+  cfg: AppConfig;
 }
 
 
-export default function AddNewWordScreen({ navigation }: AddNewWordScreenProps) {
+
+
+
+export default function AddNewWordScreen(props: AddNewWordScreenProps) {
+  const navigationToolbar = NavigationToolbar(props.navigation)
   return (
-    <View>
-      <Text>Add new word page</Text>
-      <Button title="Training" onPress={() => { return navigation.navigate("Training") }} />
+    <View style={mainStyles.fullPage}>
+      <View style={mainStyles.mainContent}>
+        <WordAddition />
+      </View>
+      {navigationToolbar}
     </View>
   );
 }
+
